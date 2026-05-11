@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block nav_dashboard %}active{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h4>
+    <span class="badge bg-success"><i class="bi bi-database-fill-check me-1"></i>Kết nối SQL Server thành công</span>
+</div>
+
+{% if db_error %}
+<div class="alert alert-danger">
+    <strong>Lỗi kết nối database:</strong> {{ db_error }}
+</div>
+{% else %}
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small mb-1">Tổng tài xế</div>
+                <div class="fs-3 fw-bold text-primary">{{ stats.total_drivers|default:"–" }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small mb-1">Tổng chuyến đi</div>
+                <div class="fs-3 fw-bold text-info">{{ stats.total_trips|default:"–" }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small mb-1">Chuyến hoàn thành</div>
+                <div class="fs-3 fw-bold text-success">{{ stats.completed_trips|default:"–" }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small mb-1">Tổng doanh thu</div>
+                <div class="fs-3 fw-bold text-warning">{{ stats.total_revenue|default:"–" }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white fw-semibold">
+        <i class="bi bi-info-circle me-2"></i>Thông tin hệ thống
+    </div>
+    <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+            <tr><td class="text-muted" style="width:180px">Database</td><td><code>{{ db_info.name }}</code></td></tr>
+            <tr><td class="text-muted">SQL Server version</td><td><code>{{ db_info.version }}</code></td></tr>
+            <tr><td class="text-muted">Host</td><td><code>{{ db_info.host }}</code></td></tr>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
