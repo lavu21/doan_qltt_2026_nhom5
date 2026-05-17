@@ -47,7 +47,7 @@ DATABASES = {
         'PORT': config('DB_PORT', default='1433'),
         'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',
-            'extra_params': 'TrustServerCertificate=yes;Encrypt=yes',
+            'extra_params': 'Encrypt=yes',
         },
     }
 }
